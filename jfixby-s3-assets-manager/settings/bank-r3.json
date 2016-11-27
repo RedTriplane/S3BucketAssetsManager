@@ -1,0 +1,11 @@
+{
+	"bank_name":"bank-r3",
+	"s3_bucket_name":"com.red-triplane.assets",
+	"s3_bucket_bank_folder_name":"bank-r3",
+	"s3_bucket_host":"s3.eu-central-1.amazonaws.com",
+	"tanks":[
+		{
+			"name":"tank-0"
+		}
+		]
+}

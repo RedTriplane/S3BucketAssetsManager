@@ -8,5 +8,9 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/jfixby-cmns-red"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jfixby-cmns-red-desktop"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jfixby-cmns-red-gdx"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jfixby-tool-eclipse"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/rana-api"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/rana-asset-red"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/rana-tools"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

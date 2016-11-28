@@ -1,18 +1,62 @@
 
 package com.jfixby.r3.s3.assets.manager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class S3BankSettings {
+import com.jfixby.cmns.api.collections.Collections;
+import com.jfixby.cmns.api.collections.Map;
+import com.jfixby.cmns.api.collections.Mapping;
+import com.jfixby.cmns.api.file.ChildrenList;
+import com.jfixby.cmns.api.file.File;
+import com.jfixby.cmns.api.file.LocalFileSystem;
+import com.jfixby.cmns.api.json.Json;
+import com.jfixby.cmns.api.net.http.Http;
+import com.jfixby.cmns.api.net.http.HttpURL;
 
+public class S3BankSettings {
 	public String bank_name = "";
 
+	public String s3_bucket_host;
 	public String s3_bucket_name;
-
 	public String s3_bucket_bank_folder_name;
 
-	public String s3_bucket_host;
-
 	public ArrayList<TankInfo> tanks = new ArrayList<>();
+
+	public String local_container_name;
+	public String local_folder_name;
+
+	@Override
+	public String toString () {
+		return "S3BankSettings [bank_name=" + this.bank_name + ", s3_bucket_host=" + this.s3_bucket_host + ", s3_bucket_name="
+			+ this.s3_bucket_name + ", s3_bucket_bank_folder_name=" + this.s3_bucket_bank_folder_name + ", tanks=" + this.tanks
+			+ ", local_container_name=" + this.local_container_name + "]";
+	}
+
+	public static Mapping<String, S3BankSettings> loadSettings () throws IOException {
+		final File settingsFolder = LocalFileSystem.ApplicationHome().child(EnvironmentConfig.SETTINGS_FOLDER_NAME);
+		final ChildrenList list = settingsFolder.listDirectChildren(file -> file.extensionIs("json"));
+		final Map<String, S3BankSettings> settingsList = Collections.newMap();
+		Collections.scanCollection(list, (file, i) -> {
+			String raw_json;
+			try {
+				raw_json = file.readToString();
+				final S3BankSettings settings = Json.deserializeFromString(S3BankSettings.class, raw_json);
+				settingsList.put(settings.bank_name, settings);
+			} catch (final IOException e) {
+
+				e.printStackTrace();
+			}
+		});
+		return settingsList;
+	}
+
+	public HttpURL toPublicURLString () {
+		final String urlString = "https://" + this.s3_bucket_host + "/" + this.s3_bucket_name + "/"
+			+ this.s3_bucket_bank_folder_name;
+		final HttpURL url = Http.newURL(urlString);
+
+		return url;
+	}
 
 }

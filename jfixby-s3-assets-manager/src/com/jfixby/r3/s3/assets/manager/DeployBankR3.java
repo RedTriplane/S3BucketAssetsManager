@@ -22,7 +22,7 @@ public class DeployBankR3 {
 
 		final String settingsFileName = "bank-r3.json";
 
-		final File settingsFolder = LocalFileSystem.ApplicationHome().child(TAGS.SETTINGS_FOLDER_NAME);
+		final File settingsFolder = LocalFileSystem.ApplicationHome().child(EnvironmentConfig.SETTINGS_FOLDER_NAME);
 
 		final File settingsFile = settingsFolder.child(settingsFileName);
 		if (!settingsFile.exists()) {

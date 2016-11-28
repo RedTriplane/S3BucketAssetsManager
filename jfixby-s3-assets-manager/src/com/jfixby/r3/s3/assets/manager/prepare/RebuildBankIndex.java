@@ -7,6 +7,7 @@ import com.jfixby.cmns.adopted.gdx.json.RedJson;
 import com.jfixby.cmns.api.collections.Collections;
 import com.jfixby.cmns.api.collections.List;
 import com.jfixby.cmns.api.collections.Mapping;
+import com.jfixby.cmns.api.debug.Debug;
 import com.jfixby.cmns.api.err.Err;
 import com.jfixby.cmns.api.file.File;
 import com.jfixby.cmns.api.file.LocalFileSystem;
@@ -14,6 +15,7 @@ import com.jfixby.cmns.api.json.Json;
 import com.jfixby.cmns.api.log.L;
 import com.jfixby.r3.s3.assets.manager.EnvironmentConfig;
 import com.jfixby.r3.s3.assets.manager.S3BankSettings;
+import com.jfixby.rana.api.pkg.bank.BankHeaderInfo;
 import com.jfixby.rana.bank.index.IndexRebuilder;
 import com.jfixby.rana.bank.index.IndexRebuilderParams;
 import com.jfixby.red.desktop.DesktopSetup;
@@ -41,6 +43,8 @@ public class RebuildBankIndex {
 
 	private static void rebuildBank (final String bankName, final List<String> tanksToProcess,
 		final Mapping<String, S3BankSettings> availableSettings) throws IOException {
+		Debug.checkNull("bankName", bankName);
+		Debug.checkEmpty("bankName", bankName);
 		L.d("processing bank", bankName);
 
 		final S3BankSettings bankSettings = availableSettings.get(bankName);
@@ -65,6 +69,12 @@ public class RebuildBankIndex {
 		rebuilderParams.addTanksToIndex(tanksToProcess);
 
 		IndexRebuilder.rebuild(rebuilderParams);
+
+		final File headerFile = bankFolder.child(BankHeaderInfo.FILE_NAME);
+		final BankHeaderInfo info = new BankHeaderInfo();
+		info.bank_name = bankName;
+		headerFile.writeString(Json.serializeToString(info).toString());
+		L.d("writing header file", headerFile + " " + headerFile.exists());
 	}
 
 }

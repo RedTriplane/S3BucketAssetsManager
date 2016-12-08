@@ -24,7 +24,7 @@ public class RebuildFileSupportingIndex {
 	public static void main (final String[] args) throws IOException {
 
 		DesktopSetup.deploy();
-		Json.installComponent("com.jfixby.cmns.adopted.gdx.json.RedJson");
+		Json.installComponent(new com.jfixby.cmns.adopted.gdx.json.RedJson());
 
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();
 		{

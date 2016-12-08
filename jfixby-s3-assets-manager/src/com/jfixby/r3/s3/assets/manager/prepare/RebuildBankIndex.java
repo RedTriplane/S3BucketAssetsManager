@@ -3,11 +3,11 @@ package com.jfixby.r3.s3.assets.manager.prepare;
 
 import java.io.IOException;
 
-import com.jfixby.cmns.adopted.gdx.json.RedJson;
 import com.jfixby.cmns.api.collections.Collections;
 import com.jfixby.cmns.api.collections.List;
 import com.jfixby.cmns.api.collections.Mapping;
 import com.jfixby.cmns.api.debug.Debug;
+import com.jfixby.cmns.api.desktop.DesktopSetup;
 import com.jfixby.cmns.api.err.Err;
 import com.jfixby.cmns.api.file.File;
 import com.jfixby.cmns.api.file.LocalFileSystem;
@@ -18,7 +18,6 @@ import com.jfixby.r3.s3.assets.manager.S3BankSettings;
 import com.jfixby.rana.api.pkg.bank.BankHeaderInfo;
 import com.jfixby.rana.bank.index.IndexRebuilder;
 import com.jfixby.rana.bank.index.IndexRebuilderParams;
-import com.jfixby.red.desktop.DesktopSetup;
 import com.jfixby.tool.eclipse.dep.EclipseProjectInfo;
 import com.jfixby.tool.eclipse.dep.EclipseWorkSpaceSettings;
 
@@ -26,16 +25,21 @@ public class RebuildBankIndex {
 
 	public static void main (final String[] args) throws IOException {
 		DesktopSetup.deploy();
-		Json.installComponent(new RedJson());
+		Json.installComponent("com.jfixby.cmns.adopted.gdx.json.RedJson");
 
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();
 		{
 			final String bankName = "com.red-triplane.assets.r3";
 			final List<String> tanksToProcess = Collections.newList("tank-0");
-			rebuildBank(bankName, tanksToProcess, availableSettings);
+// rebuildBank(bankName, tanksToProcess, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.tinto";
+			final List<String> tanksToProcess = Collections.newList("tank-0");
+// rebuildBank(bankName, tanksToProcess, availableSettings);
+		}
+		{
+			final String bankName = "com.red-triplane.assets.lib";
 			final List<String> tanksToProcess = Collections.newList("tank-0");
 			rebuildBank(bankName, tanksToProcess, availableSettings);
 		}

@@ -3,13 +3,11 @@ package com.jfixby.r3.s3.assets.manager.upload;
 
 import java.io.IOException;
 
-import com.jfixby.amazon.aws.s3.AWSS3FileSystem;
-import com.jfixby.amazon.aws.s3.AWSS3FileSystemConfig;
-import com.jfixby.cmns.adopted.gdx.json.RedJson;
 import com.jfixby.cmns.api.collections.Collections;
 import com.jfixby.cmns.api.collections.List;
 import com.jfixby.cmns.api.collections.Mapping;
 import com.jfixby.cmns.api.debug.Debug;
+import com.jfixby.cmns.api.desktop.DesktopSetup;
 import com.jfixby.cmns.api.err.Err;
 import com.jfixby.cmns.api.file.ChildrenList;
 import com.jfixby.cmns.api.file.File;
@@ -18,12 +16,15 @@ import com.jfixby.cmns.api.file.FileSystem;
 import com.jfixby.cmns.api.file.LocalFileSystem;
 import com.jfixby.cmns.api.json.Json;
 import com.jfixby.cmns.api.log.L;
+import com.jfixby.cmns.api.net.http.Http;
+import com.jfixby.cmns.api.net.http.HttpFileSystem;
+import com.jfixby.cmns.api.net.http.HttpFileSystemSpecs;
 import com.jfixby.cmns.api.net.http.HttpURL;
+import com.jfixby.cmns.aws.api.AWS;
+import com.jfixby.cmns.aws.api.S3FileSystem;
+import com.jfixby.cmns.aws.api.S3FileSystemConfig;
 import com.jfixby.r3.s3.assets.manager.EnvironmentConfig;
 import com.jfixby.r3.s3.assets.manager.S3BankSettings;
-import com.jfixby.red.desktop.DesktopSetup;
-import com.jfixby.red.filesystem.http.fs.RedHttpFileSystem;
-import com.jfixby.red.filesystem.http.fs.RedHttpFileSystemSpecs;
 import com.jfixby.tool.eclipse.dep.EclipseProjectInfo;
 import com.jfixby.tool.eclipse.dep.EclipseWorkSpaceSettings;
 
@@ -32,16 +33,22 @@ public class DeployBanks {
 	public static void main (final String[] args) throws IOException {
 
 		DesktopSetup.deploy();
-		Json.installComponent(new RedJson());
+		Json.installComponent("com.jfixby.cmns.adopted.gdx.json.RedJson");
+		AWS.installComponent("com.jfixby.amazon.aws.RedAWS");
 
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();
 		{
 			final String bankName = "com.red-triplane.assets.r3";
 			final List<String> tanksToProcess = Collections.newList("tank-0");
-			deploy(bankName, tanksToProcess, availableSettings);
+// deploy(bankName, tanksToProcess, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.tinto";
+			final List<String> tanksToProcess = Collections.newList("tank-0");
+// deploy(bankName, tanksToProcess, availableSettings);
+		}
+		{
+			final String bankName = "com.red-triplane.assets.lib";
 			final List<String> tanksToProcess = Collections.newList("tank-0");
 			deploy(bankName, tanksToProcess, availableSettings);
 		}
@@ -80,9 +87,9 @@ public class DeployBanks {
 		final String bankName = localBankFolder.getName();
 		{
 
-			final AWSS3FileSystemConfig aws_specs = new AWSS3FileSystemConfig();
+			final S3FileSystemConfig aws_specs = AWS.getS3().newFileSystemConfig();
 			aws_specs.setBucketName(bankSettings.s3_bucket_name);//
-			final AWSS3FileSystem S3 = new AWSS3FileSystem(aws_specs);
+			final S3FileSystem S3 = AWS.getS3().newFileSystem(aws_specs);
 			final File remote = S3.ROOT().child(bankSettings.s3_bucket_bank_folder_name);
 			final File local = localBankFolder;
 
@@ -107,10 +114,11 @@ public class DeployBanks {
 			L.d("checking remote bank", "" + url);
 			final File assets_cache_folder = LocalFileSystem.ApplicationHome().child("assets-cache");
 			assets_cache_folder.makeFolder();
-			final RedHttpFileSystemSpecs http_specs = new RedHttpFileSystemSpecs();
+
+			final HttpFileSystemSpecs http_specs = Http.newHttpFileSystemSpecs();
 
 			http_specs.setRootUrl(url);
-			final RedHttpFileSystem fs = new RedHttpFileSystem(http_specs);
+			final HttpFileSystem fs = Http.newHttpFileSystem(http_specs);
 			final File httpRemote = fs.ROOT();
 
 			httpRemote.listDirectChildren().print("children");

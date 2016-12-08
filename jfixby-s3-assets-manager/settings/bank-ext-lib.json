@@ -1,0 +1,13 @@
+{
+	"bank_name":"com.red-triplane.assets.lib",
+	"s3_bucket_host":"s3.eu-central-1.amazonaws.com",
+	"s3_bucket_name":"com.red-triplane.assets",
+	"s3_bucket_bank_folder_name":"bank-lib",
+	"tanks":[
+		{
+			"name":"tank-0"
+		}
+		],
+	"local_container_name":"libs",
+	"local_folder_name":"bank-lib"
+}

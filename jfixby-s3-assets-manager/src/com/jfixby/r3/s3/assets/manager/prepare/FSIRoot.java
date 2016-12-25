@@ -5,8 +5,7 @@ import java.io.IOException;
 
 import com.jfixby.r3.s3.assets.manager.EnvironmentConfig;
 import com.jfixby.r3.s3.assets.manager.S3BankSettings;
-import com.jfixby.scarabei.api.collections.Collections;
-import com.jfixby.scarabei.api.collections.List;
+import com.jfixby.scarabei.adopted.gdx.json.RedJson;
 import com.jfixby.scarabei.api.collections.Mapping;
 import com.jfixby.scarabei.api.desktop.DesktopSetup;
 import com.jfixby.scarabei.api.err.Err;
@@ -23,29 +22,26 @@ public class FSIRoot {
 	public static void main (final String[] args) throws IOException {
 
 		DesktopSetup.deploy();
-		Json.installComponent("com.jfixby.cmns.adopted.gdx.json.RedJson");
+		Json.installComponent(new RedJson());
 
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();
 		{
 			final String bankName = "com.red-triplane.assets.r3";
-			final List<String> tanksToProcess = Collections.newList("tank-0");
-// rebuildFSI(bankName, tanksToProcess, availableSettings);
+			rebuildFSI(bankName, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.tinto";
-			final List<String> tanksToProcess = Collections.newList("tank-0");
-// rebuildFSI(bankName, tanksToProcess, availableSettings);
+			rebuildFSI(bankName, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.lib";
-			final List<String> tanksToProcess = Collections.newList("tank-0");
-			rebuildFSI(bankName, tanksToProcess, availableSettings);
+			rebuildFSI(bankName, availableSettings);
 		}
 
 	}
 
-	private static void rebuildFSI (final String bankName, final List<String> tanksToProcess,
-		final Mapping<String, S3BankSettings> availableSettings) throws IOException {
+	private static void rebuildFSI (final String bankName, final Mapping<String, S3BankSettings> availableSettings)
+		throws IOException {
 		L.d("processing bank", bankName);
 
 		final S3BankSettings bankSettings = availableSettings.get(bankName);
@@ -63,9 +59,9 @@ public class FSIRoot {
 		final File assetsFolder = projectFolder.child(EnvironmentConfig.ASSETS_ROOT_FOLDER_NAME);
 		L.d("assetsFolder", assetsFolder);
 
-		final File bankFolder = assetsFolder.child(bankSettings.local_folder_name);
+// final File bankFolder = assetsFolder.child(bankSettings.local_folder_name);
 
-		rebuildIndex(bankFolder);
+		rebuildIndex(assetsFolder);
 	}
 
 	public static void rebuildIndex (final File targetFolder) throws IOException {

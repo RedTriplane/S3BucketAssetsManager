@@ -7,12 +7,10 @@ import com.jfixby.r3.s3.assets.manager.EnvironmentConfig;
 import com.jfixby.r3.s3.assets.manager.S3BankSettings;
 import com.jfixby.scarabei.adopted.gdx.json.RedJson;
 import com.jfixby.scarabei.amazon.aws.RedAWS;
-import com.jfixby.scarabei.api.collections.Collections;
-import com.jfixby.scarabei.api.collections.List;
 import com.jfixby.scarabei.api.collections.Mapping;
-import com.jfixby.scarabei.api.debug.Debug;
 import com.jfixby.scarabei.api.desktop.DesktopSetup;
 import com.jfixby.scarabei.api.err.Err;
+import com.jfixby.scarabei.api.file.ChildrenList;
 import com.jfixby.scarabei.api.file.File;
 import com.jfixby.scarabei.api.file.FileConflistResolver;
 import com.jfixby.scarabei.api.file.FileSystem;
@@ -29,7 +27,7 @@ import com.jfixby.scarabei.aws.api.S3FileSystemConfig;
 import com.jfixby.tool.eclipse.dep.EclipseProjectInfo;
 import com.jfixby.tool.eclipse.dep.EclipseWorkSpaceSettings;
 
-public class UploadTanksToS3 {
+public class UploadRootsToS3 {
 
 	public static void main (final String[] args) throws IOException {
 
@@ -40,27 +38,20 @@ public class UploadTanksToS3 {
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();
 		{
 			final String bankName = "com.red-triplane.assets.r3";
-			final List<String> tanksToProcess = Collections.newList("tank-0");
-			upload(bankName, tanksToProcess, availableSettings);
+			upload(bankName, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.tinto";
-			final List<String> tanksToProcess = Collections.newList("tank-0");
-			upload(bankName, tanksToProcess, availableSettings);
+			upload(bankName, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.lib";
-			final List<String> tanksToProcess = Collections.newList("tank-0");
-			upload(bankName, tanksToProcess, availableSettings);
+			upload(bankName, availableSettings);
 		}
 	}
 
-	private static void upload (final String bankName, final List<String> tanksToProcess,
-		final Mapping<String, S3BankSettings> availableSettings) throws IOException {
-		if (tanksToProcess.size() == 0) {
-			return;
-		}
-		L.d("processing bank", bankName);
+	private static void upload (final String bankName, final Mapping<String, S3BankSettings> availableSettings)
+		throws IOException {
 
 		final S3BankSettings bankSettings = availableSettings.get(bankName);
 		if (bankSettings == null) {
@@ -78,31 +69,21 @@ public class UploadTanksToS3 {
 		L.d("assetsFolder", assetsFolder);
 
 		final File bankFolder = assetsFolder.child(bankSettings.local_folder_name);
+		final ChildrenList files = bankFolder.listDirectChildren(f -> {
+			try {
+				return f.isFile();
+			} catch (final IOException e) {
+				e.printStackTrace();
+			}
+			return false;
+		});
 
-		for (final String tank : tanksToProcess) {
-			Debug.checkNull("tank name", tank);
-			final File localTankFolder = bankFolder.child(tank);
-			upload(localTankFolder, bankSettings);
+		for (final File file : files) {
+			upload(file, bankSettings);
 		}
-	}
 
-	private static void upload (final File localTankFolder, final S3BankSettings bankSettings) throws IOException {
-		Debug.checkTrue(localTankFolder + " does not exist", localTankFolder.exists());
-		final String tankName = localTankFolder.getName();
 		{
-
-			final S3FileSystemConfig aws_specs = AWS.getS3().newFileSystemConfig();
-			aws_specs.setBucketName(bankSettings.s3_bucket_name);//
-			final S3FileSystem S3 = AWS.getS3().newFileSystem(aws_specs);
-			final File remote = S3.ROOT().child(bankSettings.s3_bucket_bank_folder_name).child(tankName);
-			final File local = localTankFolder;
-
-			final FileSystem FS = remote.getFileSystem();
-
-			FS.copyFolderContentsToFolder(local, remote, FileConflistResolver.OVERWRITE_ON_HASH_MISMATCH);
-		}
-		{
-			final HttpURL url = bankSettings.toPublicURLString().child(tankName);
+			final HttpURL url = bankSettings.toPublicURLString();
 			L.d("checking remote bank", "" + url);
 			final File assets_cache_folder = LocalFileSystem.ApplicationHome().child("assets-cache");
 			assets_cache_folder.makeFolder();
@@ -112,8 +93,24 @@ public class UploadTanksToS3 {
 			final HttpFileSystem fs = Http.newHttpFileSystem(http_specs);
 			final File httpRemote = fs.ROOT();
 
-			httpRemote.listAllChildren().print("all-children");
+			httpRemote.listDirectChildren().print("all-children");
 
+		}
+	}
+
+	private static void upload (final File rootFile, final S3BankSettings bankSettings) throws IOException {
+		{
+
+			final S3FileSystemConfig aws_specs = AWS.getS3().newFileSystemConfig();
+			aws_specs.setBucketName(bankSettings.s3_bucket_name);//
+			final S3FileSystem S3 = AWS.getS3().newFileSystem(aws_specs);
+			final File remote = S3.ROOT().child(bankSettings.s3_bucket_bank_folder_name);
+			final File local = rootFile;
+
+			final FileSystem FS = remote.getFileSystem();
+
+// FS.copyFolderContentsToFolder(local, remote, FileConflistResolver.OVERWRITE_ON_HASH_MISMATCH);
+			FS.copyFileToFolder(local, remote, FileConflistResolver.OVERWRITE_ON_HASH_MISMATCH);
 		}
 
 	}

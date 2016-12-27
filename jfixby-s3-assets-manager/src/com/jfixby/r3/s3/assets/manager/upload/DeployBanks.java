@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import com.jfixby.r3.s3.assets.manager.EnvironmentConfig;
 import com.jfixby.r3.s3.assets.manager.S3BankSettings;
+import com.jfixby.scarabei.adopted.gdx.json.RedJson;
+import com.jfixby.scarabei.amazon.aws.RedAWS;
 import com.jfixby.scarabei.api.collections.Collections;
 import com.jfixby.scarabei.api.collections.List;
 import com.jfixby.scarabei.api.collections.Mapping;
@@ -33,8 +35,8 @@ public class DeployBanks {
 	public static void main (final String[] args) throws IOException {
 
 		DesktopSetup.deploy();
-		Json.installComponent("com.jfixby.cmns.adopted.gdx.json.RedJson");
-		AWS.installComponent("com.jfixby.amazon.aws.RedAWS");
+		Json.installComponent(new RedJson());
+		AWS.installComponent(new RedAWS());
 
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();
 		{
@@ -49,6 +51,11 @@ public class DeployBanks {
 		}
 		{
 			final String bankName = "com.red-triplane.assets.lib";
+			final List<String> tanksToProcess = Collections.newList("tank-0");
+// deploy(bankName, tanksToProcess, availableSettings);
+		}
+		{
+			final String bankName = "com.red-triplane.assets.parallax";
 			final List<String> tanksToProcess = Collections.newList("tank-0");
 			deploy(bankName, tanksToProcess, availableSettings);
 		}

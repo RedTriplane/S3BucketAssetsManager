@@ -27,14 +27,18 @@ public class FSIRoot {
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();
 		{
 			final String bankName = "com.red-triplane.assets.r3";
-			rebuildFSI(bankName, availableSettings);
+// rebuildFSI(bankName, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.tinto";
-			rebuildFSI(bankName, availableSettings);
+// rebuildFSI(bankName, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.lib";
+// rebuildFSI(bankName, availableSettings);
+		}
+		{
+			final String bankName = "com.red-triplane.assets.parallax";
 			rebuildFSI(bankName, availableSettings);
 		}
 

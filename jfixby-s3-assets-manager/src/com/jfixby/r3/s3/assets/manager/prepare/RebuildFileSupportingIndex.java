@@ -30,12 +30,12 @@ public class RebuildFileSupportingIndex {
 		{
 			final String bankName = "com.red-triplane.assets.r3";
 			final List<String> tanksToProcess = Collections.newList("tank-0");
-			rebuildFSI(bankName, tanksToProcess, availableSettings);
+// rebuildFSI(bankName, tanksToProcess, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.tinto";
 			final List<String> tanksToProcess = Collections.newList("tank-0");
-			rebuildFSI(bankName, tanksToProcess, availableSettings);
+// rebuildFSI(bankName, tanksToProcess, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.lib";

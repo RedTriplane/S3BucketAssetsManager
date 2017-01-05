@@ -19,6 +19,8 @@ import com.jfixby.tool.eclipse.dep.EclipseWorkSpaceSettings;
 
 public class FSIRoot {
 
+	static boolean fail_on_mismatch = true;
+
 	public static void main (final String[] args) throws IOException {
 
 		DesktopSetup.deploy();
@@ -77,6 +79,7 @@ public class FSIRoot {
 		params.setTarget(targetFolder);
 		params.setRebuidOnlyForRoot(true);
 		params.setDebug(true);
+		params.setIgnoreJsonDecoderFailure(false);
 		params.setIgnoreHashSum(!true);
 		params.setNoOutput(false);
 		params.setRecoursive(false);

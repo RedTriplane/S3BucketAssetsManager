@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import com.jfixby.scarabei.api.collections.Collections;
 import com.jfixby.scarabei.api.collections.Map;
 import com.jfixby.scarabei.api.collections.Mapping;
-import com.jfixby.scarabei.api.file.ChildrenList;
+import com.jfixby.scarabei.api.file.FilesList;
 import com.jfixby.scarabei.api.file.File;
 import com.jfixby.scarabei.api.file.LocalFileSystem;
 import com.jfixby.scarabei.api.json.Json;
@@ -35,7 +35,7 @@ public class S3BankSettings {
 
 	public static Mapping<String, S3BankSettings> loadSettings () throws IOException {
 		final File settingsFolder = LocalFileSystem.ApplicationHome().child(EnvironmentConfig.SETTINGS_FOLDER_NAME);
-		final ChildrenList list = settingsFolder.listDirectChildren(file -> file.extensionIs("json"));
+		final FilesList list = settingsFolder.listDirectChildren(file -> file.extensionIs("json"));
 		final Map<String, S3BankSettings> settingsList = Collections.newMap();
 		Collections.scanCollection(list, (file, i) -> {
 			String raw_json;

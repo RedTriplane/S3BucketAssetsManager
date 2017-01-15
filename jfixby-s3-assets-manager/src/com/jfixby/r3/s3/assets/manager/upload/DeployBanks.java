@@ -13,7 +13,7 @@ import com.jfixby.scarabei.api.collections.Mapping;
 import com.jfixby.scarabei.api.debug.Debug;
 import com.jfixby.scarabei.api.desktop.DesktopSetup;
 import com.jfixby.scarabei.api.err.Err;
-import com.jfixby.scarabei.api.file.ChildrenList;
+import com.jfixby.scarabei.api.file.FilesList;
 import com.jfixby.scarabei.api.file.File;
 import com.jfixby.scarabei.api.file.FileConflistResolver;
 import com.jfixby.scarabei.api.file.FileSystem;
@@ -102,7 +102,7 @@ public class DeployBanks {
 
 			final FileSystem FS = remote.getFileSystem();
 
-			final ChildrenList toCopy = local.listDirectChildren();
+			final FilesList toCopy = local.listDirectChildren();
 			toCopy.print("deploy");
 			for (final File f : toCopy) {
 				final File twin = remote.child(f.getName());

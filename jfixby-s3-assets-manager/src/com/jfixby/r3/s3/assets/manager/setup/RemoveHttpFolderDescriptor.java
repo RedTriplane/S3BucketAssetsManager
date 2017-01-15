@@ -6,10 +6,10 @@ import java.io.IOException;
 import com.jfixby.r3.s3.assets.manager.EnvironmentConfig;
 import com.jfixby.r3.s3.assets.manager.S3BankSettings;
 import com.jfixby.scarabei.api.collections.Collections;
-import com.jfixby.scarabei.api.collections.List;
 import com.jfixby.scarabei.api.collections.Mapping;
 import com.jfixby.scarabei.api.desktop.DesktopSetup;
 import com.jfixby.scarabei.api.err.Err;
+import com.jfixby.scarabei.api.file.FilesList;
 import com.jfixby.scarabei.api.file.File;
 import com.jfixby.scarabei.api.file.LocalFileSystem;
 import com.jfixby.scarabei.api.json.Json;
@@ -56,7 +56,7 @@ public class RemoveHttpFolderDescriptor {
 		final EclipseProjectInfo projectInfo = workspace_settings.getProjectInfo(bankSettings.local_container_name);
 		final File projectFolder = projectInfo.getProjectPath();
 
-		final List<File> toDelete = projectFolder.listAllChildren()
+		final FilesList toDelete = projectFolder.listAllChildren()
 			.filter( (file) -> file.getName().startsWith("http.folder-descriptor"));
 
 		toDelete.print("toDelete");

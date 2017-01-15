@@ -10,7 +10,7 @@ import com.jfixby.scarabei.amazon.aws.RedAWS;
 import com.jfixby.scarabei.api.collections.Mapping;
 import com.jfixby.scarabei.api.desktop.DesktopSetup;
 import com.jfixby.scarabei.api.err.Err;
-import com.jfixby.scarabei.api.file.ChildrenList;
+import com.jfixby.scarabei.api.file.FilesList;
 import com.jfixby.scarabei.api.file.File;
 import com.jfixby.scarabei.api.file.FileConflistResolver;
 import com.jfixby.scarabei.api.file.FileSystem;
@@ -69,7 +69,7 @@ public class UploadRootsToS3 {
 		L.d("assetsFolder", assetsFolder);
 
 		final File bankFolder = assetsFolder.child(bankSettings.local_folder_name);
-		final ChildrenList files = bankFolder.listDirectChildren(f -> {
+		final FilesList files = bankFolder.listDirectChildren(f -> {
 			try {
 				return f.isFile();
 			} catch (final IOException e) {

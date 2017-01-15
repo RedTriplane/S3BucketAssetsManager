@@ -10,7 +10,7 @@ import com.jfixby.rana.api.pkg.bank.BankHeaderInfo;
 import com.jfixby.scarabei.api.collections.Collections;
 import com.jfixby.scarabei.api.desktop.DesktopSetup;
 import com.jfixby.scarabei.api.err.Err;
-import com.jfixby.scarabei.api.file.ChildrenList;
+import com.jfixby.scarabei.api.file.FilesList;
 import com.jfixby.scarabei.api.file.File;
 import com.jfixby.scarabei.api.file.LocalFileSystem;
 import com.jfixby.scarabei.api.json.Json;
@@ -46,7 +46,7 @@ public class CreateExampleSettings {
 		settings.local_container_name = EnvironmentConfig.R3AssetProjectName;
 		settings.local_folder_name = "bank-r3";
 
-		final ChildrenList children = bankFolder.listDirectChildren(file -> {
+		final FilesList children = bankFolder.listDirectChildren(file -> {
 			try {
 				return file.isFolder();
 			} catch (final IOException e) {

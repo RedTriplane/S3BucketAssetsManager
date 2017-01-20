@@ -10,10 +10,10 @@ import com.jfixby.scarabei.amazon.aws.RedAWS;
 import com.jfixby.scarabei.api.collections.Mapping;
 import com.jfixby.scarabei.api.desktop.DesktopSetup;
 import com.jfixby.scarabei.api.err.Err;
-import com.jfixby.scarabei.api.file.FilesList;
 import com.jfixby.scarabei.api.file.File;
 import com.jfixby.scarabei.api.file.FileConflistResolver;
 import com.jfixby.scarabei.api.file.FileSystem;
+import com.jfixby.scarabei.api.file.FilesList;
 import com.jfixby.scarabei.api.file.LocalFileSystem;
 import com.jfixby.scarabei.api.json.Json;
 import com.jfixby.scarabei.api.log.L;
@@ -38,7 +38,7 @@ public class UploadRootsToS3 {
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();
 		{
 			final String bankName = "com.red-triplane.assets.r3";
-			upload(bankName, availableSettings);
+// upload(bankName, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.tinto";
@@ -46,7 +46,7 @@ public class UploadRootsToS3 {
 		}
 		{
 			final String bankName = "com.red-triplane.assets.lib";
-			upload(bankName, availableSettings);
+// upload(bankName, availableSettings);
 		}
 	}
 

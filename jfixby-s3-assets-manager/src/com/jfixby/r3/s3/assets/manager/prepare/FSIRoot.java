@@ -33,7 +33,7 @@ public class FSIRoot {
 		}
 		{
 			final String bankName = "com.red-triplane.assets.tinto";
-// rebuildFSI(bankName, availableSettings);
+			rebuildFSI(bankName, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.lib";
@@ -41,7 +41,7 @@ public class FSIRoot {
 		}
 		{
 			final String bankName = "com.red-triplane.assets.parallax";
-			rebuildFSI(bankName, availableSettings);
+// rebuildFSI(bankName, availableSettings);
 		}
 
 	}

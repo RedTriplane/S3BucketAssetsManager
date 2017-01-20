@@ -37,12 +37,12 @@ public class RebuildBankIndex {
 		{
 			final String bankName = "com.red-triplane.assets.tinto";
 			final List<String> tanksToProcess = Collections.newList("tank-0");
-// rebuildBank(bankName, tanksToProcess, availableSettings);
+			rebuildBank(bankName, tanksToProcess, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.lib";
 			final List<String> tanksToProcess = Collections.newList("tank-0");
-			rebuildBank(bankName, tanksToProcess, availableSettings);
+// rebuildBank(bankName, tanksToProcess, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.parallax";

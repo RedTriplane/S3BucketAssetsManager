@@ -41,7 +41,7 @@ public class UploadTanksToS3 {
 		{
 			final String bankName = "com.red-triplane.assets.r3";
 			final List<String> tanksToProcess = Collections.newList("tank-0");
-			upload(bankName, tanksToProcess, availableSettings);
+// upload(bankName, tanksToProcess, availableSettings);
 		}
 		{
 			final String bankName = "com.red-triplane.assets.tinto";
@@ -51,7 +51,7 @@ public class UploadTanksToS3 {
 		{
 			final String bankName = "com.red-triplane.assets.lib";
 			final List<String> tanksToProcess = Collections.newList("tank-0");
-			upload(bankName, tanksToProcess, availableSettings);
+// upload(bankName, tanksToProcess, availableSettings);
 		}
 	}
 

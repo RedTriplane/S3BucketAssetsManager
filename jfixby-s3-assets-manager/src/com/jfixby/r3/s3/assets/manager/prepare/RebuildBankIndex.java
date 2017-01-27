@@ -8,7 +8,7 @@ import com.jfixby.r3.s3.assets.manager.S3BankSettings;
 import com.jfixby.rana.api.pkg.bank.BankHeaderInfo;
 import com.jfixby.rana.bank.index.IndexRebuilder;
 import com.jfixby.rana.bank.index.IndexRebuilderParams;
-import com.jfixby.scarabei.adopted.gdx.json.RedJson;
+import com.jfixby.scarabei.adopted.gdx.json.GoogleGson;
 import com.jfixby.scarabei.api.collections.Collections;
 import com.jfixby.scarabei.api.collections.List;
 import com.jfixby.scarabei.api.collections.Mapping;
@@ -26,7 +26,7 @@ public class RebuildBankIndex {
 
 	public static void main (final String[] args) throws IOException {
 		DesktopSetup.deploy();
-		Json.installComponent(new RedJson());
+		Json.installComponent(new GoogleGson());
 
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();
 		{

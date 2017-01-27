@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import com.jfixby.r3.s3.assets.manager.EnvironmentConfig;
 import com.jfixby.r3.s3.assets.manager.S3BankSettings;
-import com.jfixby.scarabei.adopted.gdx.json.RedJson;
+import com.jfixby.scarabei.adopted.gdx.json.GoogleGson;
 import com.jfixby.scarabei.amazon.aws.RedAWS;
 import com.jfixby.scarabei.api.collections.Mapping;
 import com.jfixby.scarabei.api.desktop.DesktopSetup;
@@ -32,7 +32,7 @@ public class UploadRootsToS3 {
 	public static void main (final String[] args) throws IOException {
 
 		DesktopSetup.deploy();
-		Json.installComponent(new RedJson());
+		Json.installComponent(new GoogleGson());
 		AWS.installComponent(new RedAWS());
 
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();

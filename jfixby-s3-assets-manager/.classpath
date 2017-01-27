@@ -31,7 +31,7 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/rana-tools"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/scarabei-aws-api"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/scarabei-aws-red"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/scarabei-red-gdx"/>
+		<classpathentry combineaccessrules="false" kind="src" path="/scarabei-gson"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/scarabei-red"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

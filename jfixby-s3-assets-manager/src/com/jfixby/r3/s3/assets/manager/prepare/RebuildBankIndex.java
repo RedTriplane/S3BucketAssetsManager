@@ -13,7 +13,7 @@ import com.jfixby.scarabei.api.collections.Collections;
 import com.jfixby.scarabei.api.collections.List;
 import com.jfixby.scarabei.api.collections.Mapping;
 import com.jfixby.scarabei.api.debug.Debug;
-import com.jfixby.scarabei.api.desktop.DesktopSetup;
+import com.jfixby.scarabei.api.desktop.ScarabeiDesktop;
 import com.jfixby.scarabei.api.err.Err;
 import com.jfixby.scarabei.api.file.File;
 import com.jfixby.scarabei.api.file.LocalFileSystem;
@@ -25,7 +25,7 @@ import com.jfixby.tool.eclipse.dep.EclipseWorkSpaceSettings;
 public class RebuildBankIndex {
 
 	public static void main (final String[] args) throws IOException {
-		DesktopSetup.deploy();
+		ScarabeiDesktop.deploy();
 		Json.installComponent(new GoogleGson());
 
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();

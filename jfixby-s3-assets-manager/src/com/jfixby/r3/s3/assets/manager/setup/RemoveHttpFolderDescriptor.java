@@ -7,7 +7,7 @@ import com.jfixby.r3.s3.assets.manager.EnvironmentConfig;
 import com.jfixby.r3.s3.assets.manager.S3BankSettings;
 import com.jfixby.scarabei.api.collections.Collections;
 import com.jfixby.scarabei.api.collections.Mapping;
-import com.jfixby.scarabei.api.desktop.DesktopSetup;
+import com.jfixby.scarabei.api.desktop.ScarabeiDesktop;
 import com.jfixby.scarabei.api.err.Err;
 import com.jfixby.scarabei.api.file.FilesList;
 import com.jfixby.scarabei.api.file.File;
@@ -24,7 +24,7 @@ public class RemoveHttpFolderDescriptor {
 
 // http.folder-descriptor
 
-		DesktopSetup.deploy();
+		ScarabeiDesktop.deploy();
 		Json.installComponent("com.jfixby.cmns.adopted.gdx.json.RedJson");
 
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();

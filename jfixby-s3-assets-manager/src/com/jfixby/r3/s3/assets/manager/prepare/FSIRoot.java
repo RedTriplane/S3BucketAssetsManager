@@ -7,7 +7,7 @@ import com.jfixby.r3.s3.assets.manager.EnvironmentConfig;
 import com.jfixby.r3.s3.assets.manager.S3BankSettings;
 import com.jfixby.scarabei.adopted.gdx.json.GoogleGson;
 import com.jfixby.scarabei.api.collections.Mapping;
-import com.jfixby.scarabei.api.desktop.DesktopSetup;
+import com.jfixby.scarabei.api.desktop.ScarabeiDesktop;
 import com.jfixby.scarabei.api.err.Err;
 import com.jfixby.scarabei.api.file.File;
 import com.jfixby.scarabei.api.file.FolderSupportingIndexBuilderParams;
@@ -23,7 +23,7 @@ public class FSIRoot {
 
 	public static void main (final String[] args) throws IOException {
 
-		DesktopSetup.deploy();
+		ScarabeiDesktop.deploy();
 		Json.installComponent(new GoogleGson());
 
 		final Mapping<String, S3BankSettings> availableSettings = S3BankSettings.loadSettings();

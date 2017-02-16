@@ -8,7 +8,7 @@ import com.jfixby.r3.s3.assets.manager.S3BankSettings;
 import com.jfixby.r3.s3.assets.manager.TankInfo;
 import com.jfixby.rana.api.pkg.bank.BankHeaderInfo;
 import com.jfixby.scarabei.api.collections.Collections;
-import com.jfixby.scarabei.api.desktop.DesktopSetup;
+import com.jfixby.scarabei.api.desktop.ScarabeiDesktop;
 import com.jfixby.scarabei.api.err.Err;
 import com.jfixby.scarabei.api.file.FilesList;
 import com.jfixby.scarabei.api.file.File;
@@ -22,7 +22,7 @@ import com.jfixby.tool.eclipse.dep.EclipseWorkSpaceSettings;
 public class CreateExampleSettings {
 
 	public static void main (final String[] args) throws IOException {
-		DesktopSetup.deploy();
+		ScarabeiDesktop.deploy();
 		Json.installComponent("com.jfixby.cmns.adopted.gdx.json.RedJson");
 
 		final File workspace_folder = LocalFileSystem.newFile(EnvironmentConfig.WORKSPACE_FOLDER);

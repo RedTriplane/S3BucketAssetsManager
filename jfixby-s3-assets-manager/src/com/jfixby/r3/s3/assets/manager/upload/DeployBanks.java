@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import com.jfixby.r3.s3.assets.manager.EnvironmentConfig;
 import com.jfixby.r3.s3.assets.manager.S3BankSettings;
-import com.jfixby.scarabei.adopted.gdx.json.GoogleGson;
 import com.jfixby.scarabei.amazon.aws.RedAWS;
 import com.jfixby.scarabei.api.collections.Collections;
 import com.jfixby.scarabei.api.collections.List;
@@ -27,6 +26,7 @@ import com.jfixby.scarabei.api.net.http.HttpURL;
 import com.jfixby.scarabei.aws.api.AWS;
 import com.jfixby.scarabei.aws.api.S3FileSystem;
 import com.jfixby.scarabei.aws.api.S3FileSystemConfig;
+import com.jfixby.scarabei.gson.GoogleGson;
 import com.jfixby.tool.eclipse.dep.EclipseProjectInfo;
 import com.jfixby.tool.eclipse.dep.EclipseWorkSpaceSettings;
 

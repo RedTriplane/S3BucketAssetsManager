@@ -1,0 +1,31 @@
+apply plugin: "java"
+apply plugin: "maven"
+
+sourceCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+
+dependencies {
+      compile project(":jfixby-tool-eclipse")
+      compile project(":rana-api")
+      compile project(":rana-asset-red")
+      compile project(":rana-tools")
+      compile project(":scarabei-api")
+      compile project(":scarabei-api-desktop")
+      compile project(":scarabei-aws-api")
+      compile project(":scarabei-aws-red")
+      compile project(":scarabei-gson")
+      compile project(":scarabei-red")
+      compile project(":scarabei-red-desktop")
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/']
+        }
+        resources {
+            
+        }
+    }
+}

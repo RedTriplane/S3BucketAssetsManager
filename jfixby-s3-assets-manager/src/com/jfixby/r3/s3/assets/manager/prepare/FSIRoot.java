@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import com.jfixby.r3.s3.assets.manager.EnvironmentConfig;
 import com.jfixby.r3.s3.assets.manager.S3BankSettings;
-import com.jfixby.scarabei.adopted.gdx.json.GoogleGson;
 import com.jfixby.scarabei.api.collections.Mapping;
 import com.jfixby.scarabei.api.desktop.ScarabeiDesktop;
 import com.jfixby.scarabei.api.err.Err;
@@ -14,6 +13,7 @@ import com.jfixby.scarabei.api.file.FolderSupportingIndexBuilderParams;
 import com.jfixby.scarabei.api.file.LocalFileSystem;
 import com.jfixby.scarabei.api.json.Json;
 import com.jfixby.scarabei.api.log.L;
+import com.jfixby.scarabei.gson.GoogleGson;
 import com.jfixby.tool.eclipse.dep.EclipseProjectInfo;
 import com.jfixby.tool.eclipse.dep.EclipseWorkSpaceSettings;
 

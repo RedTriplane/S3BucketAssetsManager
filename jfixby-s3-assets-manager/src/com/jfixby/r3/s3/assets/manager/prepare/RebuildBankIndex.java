@@ -72,7 +72,7 @@ public class RebuildBankIndex {
 		final File assetsFolder = projectFolder.child(EnvironmentConfig.ASSETS_ROOT_FOLDER_NAME);
 		L.d("assetsFolder", assetsFolder);
 
-		final File bankFolder = assetsFolder.child(bankSettings.local_folder_name);
+		final File bankFolder = assetsFolder.child(bankSettings.local_bank_folder_name);
 
 		final IndexRebuilderParams rebuilderParams = new IndexRebuilderParams();
 		rebuilderParams.setBankFolder(bankFolder);

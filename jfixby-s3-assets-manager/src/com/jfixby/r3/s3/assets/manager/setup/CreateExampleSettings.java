@@ -44,7 +44,7 @@ public class CreateExampleSettings {
 		settings.s3_bucket_host = "s3.eu-central-1.amazonaws.com";
 
 		settings.local_container_name = EnvironmentConfig.R3AssetProjectName;
-		settings.local_folder_name = "bank-r3";
+		settings.local_bank_folder_name = "bank-r3";
 
 		final FilesList children = bankFolder.listDirectChildren(file -> {
 			try {

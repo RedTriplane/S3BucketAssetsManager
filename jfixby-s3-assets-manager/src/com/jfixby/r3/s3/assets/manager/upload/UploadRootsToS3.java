@@ -68,7 +68,7 @@ public class UploadRootsToS3 {
 		final File assetsFolder = projectFolder.child(EnvironmentConfig.ASSETS_ROOT_FOLDER_NAME);
 		L.d("assetsFolder", assetsFolder);
 
-		final File bankFolder = assetsFolder.child(bankSettings.local_folder_name);
+		final File bankFolder = assetsFolder.child(bankSettings.local_bank_folder_name);
 		final FilesList files = bankFolder.listDirectChildren(f -> {
 			try {
 				return f.isFile();

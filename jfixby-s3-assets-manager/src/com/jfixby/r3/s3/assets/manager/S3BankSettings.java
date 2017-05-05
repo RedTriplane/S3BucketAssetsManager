@@ -7,14 +7,16 @@ import java.util.ArrayList;
 import com.jfixby.scarabei.api.collections.Collections;
 import com.jfixby.scarabei.api.collections.Map;
 import com.jfixby.scarabei.api.collections.Mapping;
-import com.jfixby.scarabei.api.file.FilesList;
 import com.jfixby.scarabei.api.file.File;
+import com.jfixby.scarabei.api.file.FilesList;
 import com.jfixby.scarabei.api.file.LocalFileSystem;
 import com.jfixby.scarabei.api.json.Json;
 import com.jfixby.scarabei.api.net.http.Http;
 import com.jfixby.scarabei.api.net.http.HttpURL;
 
 public class S3BankSettings {
+
+	public static final String FILE_NAME = "s3-bank-settings.json";
 	public String bank_name = "";
 
 	public String s3_bucket_host;
@@ -24,7 +26,7 @@ public class S3BankSettings {
 	public ArrayList<TankInfo> tanks = new ArrayList<>();
 
 	public String local_container_name;
-	public String local_folder_name;
+	public String local_bank_folder_name;
 
 	@Override
 	public String toString () {
